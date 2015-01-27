@@ -1,0 +1,2 @@
+# amor
+Amortization table
