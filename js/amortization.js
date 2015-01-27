@@ -1,0 +1,2 @@
+var Amortization;Amortization=function(){function t(t,n,o){this.interest=t,this.loanAmount=n,this.years=o,calculateMonthlyPayment()}return t.prototype.calculateMonthlyPayment=function(){var t,n;return n=12*this.years,t=this.interest/12,this.monthlyPayment=this.interest*loanAmount*Math.pow(1+t,n)/(Math.pow(1+t,n)-1),this.totalCost=this.monthlyPayment*n},t}();
+//# sourceMappingURL=./amortization.js.map
