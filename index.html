@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amor</title>
+    <title>Amortizer</title>
     <link rel="stylesheet" href="stylesheets/app.css">
     <script src="bower_components/modernizr/modernizr.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -14,16 +14,25 @@
       <div class="layout">
         <form id="info">
           <div class="field">
-            <label for="input-loan-amount">Loan Amount</label>
-            <input id="input-loan-amount" type="text" placeholder="$" class="currency">
+            <label for="input-loan-amount">Loan Amount
+              <div class="input"><span class="prefix">$</span>
+                <input id="input-loan-amount" type="number" placeholder="How much?" required class="currency">
+              </div>
+            </label>
           </div>
           <div class="field">
-            <label for="input-term">Term</label>
-            <input id="input-term" type="text" placeholder="years">
+            <label for="input-term">Term
+              <div class="input"><span class="prefix">Years</span>
+                <input id="input-term" type="number" placeholder="How long?" required>
+              </div>
+            </label>
           </div>
           <div class="field">
-            <label for="input-interest">Interest Rate</label>
-            <input id="input-interest" type="text" placeholder="%">
+            <label for="input-interest">Interest Rate
+              <div class="input"><span class="prefix">%</span>
+                <input id="input-interest" type="number" placeholder="Your rate" required>
+              </div>
+            </label>
           </div>
           <div class="field">
             <label for="input-start-date-month">Start Date</label>
@@ -67,7 +76,7 @@
               <option value="2012">2012</option>
               <option value="2013">2013</option>
               <option value="2014">2014</option>
-              <option value="2015">2015</option>
+              <option value="2015" selected>2015</option>
             </select>
           </div>
           <div class="field">
@@ -78,7 +87,7 @@
     </div>
     <main class="layout">
       <div id="content">
-        <h1>Amor</h1>
+        <h1>Amortizer</h1>
         <div id="summary" class="panel">
           <dl>
             <dd id="summary-monthly-payment">$0.00</dd>

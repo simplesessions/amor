@@ -11,6 +11,16 @@ main {
   position: fixed;
 }
 
+.input {
+  @include grid-row;
+  span {
+    @include grid-column($columns: 4);
+  }
+  input {
+    @include grid-column($columns: 8);
+  }
+}
+
 #info {
   @include grid-column($columns: 3, $push: 9);
   background: map-get($colors, "panel-bg");

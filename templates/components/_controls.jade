@@ -2,14 +2,23 @@
   .layout
     form#info
       .field
-        label(for="input-loan-amount") Loan Amount
-        input#input-loan-amount.currency(type="text" placeholder="$")
+        label(for="input-loan-amount")
+          | Loan Amount
+          .input
+            span.prefix $
+            input#input-loan-amount.currency(type="number" placeholder="How much?" required)
       .field
-        label(for="input-term") Term
-        input#input-term(type="text" placeholder="years")
+        label(for="input-term")
+          | Term
+          .input
+            span.prefix Years
+            input#input-term(type="number" placeholder="How long?" required)
       .field
-        label(for="input-interest") Interest Rate
-        input#input-interest(type="text" placeholder="%")
+        label(for="input-interest")
+          | Interest Rate
+          .input
+            span.prefix %
+            input#input-interest(type="number" placeholder="Your rate" required)
       .field
         label(for="input-start-date-month") Start Date
         select#input-start-date-month
@@ -27,8 +36,12 @@
           option(value="12") December
         select#input-start-date-year
           - var year = 1990
-          while year < 2016
-            option(value=year)=year
+          - var maxYear = 2016
+          while year < maxYear
+            if year === maxYear - 1
+              option(value=year selected)=year
+            else
+              option(value=year)=year
             - year++
       .field
         input.button(type="submit" name="submit" value="Calculate")
