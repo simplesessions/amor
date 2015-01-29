@@ -16,7 +16,8 @@ html.no-js(lang="en")
 
     main.layout
       #content
-        h1 Amortization Table
+        h1 Amor
+        include components/_summary_panel
         table#amortization
           thead
             tr
@@ -25,21 +26,9 @@ html.no-js(lang="en")
               th Principal
               th Balance
           tbody
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +month('Jan 2015', 353535, 3535353, 35353)
-            +year('2015', 34543534543, 34534543534, 35345345)
 
     script(src="bower_components/jquery/dist/jquery.min.js")
-    script(src="bower_components/foundation/js/foundation.min.js")
+    script(src="bower_components/moment/moment.js")
+    script(src="bower_components/accounting/accounting.min.js")
     script(src="js/amortization.js")
     script(src="js/app.js")

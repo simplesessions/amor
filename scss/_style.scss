@@ -24,3 +24,19 @@ main {
 #amortization {
   width: 100%;
 }
+
+table {
+  tr {
+    &.year-summary {
+      background-color: map-get($colors, "summary-row");
+    }
+  }
+}
+
+#summary {
+  @include grid-row;
+  margin-bottom: rem-calc(30);
+  dl {
+    @include grid-column($columns: 3);
+  }
+}

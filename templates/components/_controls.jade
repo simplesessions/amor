@@ -1,6 +1,6 @@
 #controls
   .layout
-    #info
+    form#info
       .field
         label(for="input-loan-amount") Loan Amount
         input#input-loan-amount.currency(type="text" placeholder="$")
@@ -30,3 +30,5 @@
           while year < 2016
             option(value=year)=year
             - year++
+      .field
+        input.button(type="submit" name="submit" value="Calculate")

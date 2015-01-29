@@ -12,7 +12,7 @@
   <body>
     <div id="controls">
       <div class="layout">
-        <div id="info">
+        <form id="info">
           <div class="field">
             <label for="input-loan-amount">Loan Amount</label>
             <input id="input-loan-amount" type="text" placeholder="$" class="currency">
@@ -70,12 +70,33 @@
               <option value="2015">2015</option>
             </select>
           </div>
-        </div>
+          <div class="field">
+            <input type="submit" name="submit" value="Calculate" class="button">
+          </div>
+        </form>
       </div>
     </div>
     <main class="layout">
       <div id="content">
-        <h1>Amortization Table</h1>
+        <h1>Amor</h1>
+        <div id="summary" class="panel">
+          <dl>
+            <dd id="summary-monthly-payment">$0.00</dd>
+            <dt>Monthly Principal &amp; Interest</dt>
+          </dl>
+          <dl>
+            <dd id="summary-total-payment">$0.00</dd>
+            <dt>Total of <span class="num-payments">_</span> Payments</dt>
+          </dl>
+          <dl>
+            <dd id="summary-total-interest">$0.00</dd>
+            <dt>Total Interest Paid</dt>
+          </dl>
+          <dl>
+            <dd id="summary-pay-off-date"></dd>
+            <dt>Pay-off Date</dt>
+          </dl>
+        </div>
         <table id="amortization">
           <thead>
             <tr>
@@ -85,91 +106,13 @@
               <th>Balance</th>
             </tr>
           </thead>
-          <tbody>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="month">
-              <td>Jan 2015</td>
-              <td>353535</td>
-              <td>3535353</td>
-              <td>35353</td>
-            </tr>
-            <tr class="year">
-              <td>2015</td>
-              <td>34543534543</td>
-              <td>34534543534</td>
-              <td>35345345</td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
       </div>
     </main>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/foundation/js/foundation.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/accounting/accounting.min.js"></script>
     <script src="js/amortization.js"></script>
     <script src="js/app.js"></script>
   </body>
