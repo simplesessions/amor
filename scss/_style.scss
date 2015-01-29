@@ -1,0 +1,16 @@
+main {
+  @include grid-row;
+}
+
+#controls {
+  @include grid-row;
+  position: fixed;
+}
+
+#info {
+  @include grid-column($columns: 2, $push: 10);
+}
+
+#content {
+  @include grid-column($columns: 10);
+}
