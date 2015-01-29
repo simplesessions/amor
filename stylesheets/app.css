@@ -59,7 +59,7 @@ body {
   color: #222;
   padding: 0;
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
   line-height: 1.5;
@@ -122,7 +122,7 @@ button, .button {
   border-style: solid;
   border-width: 0;
   cursor: pointer;
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: normal;
   line-height: normal;
   margin: 0 0 1.25rem;
@@ -335,7 +335,7 @@ label {
   color: #4d4d4d;
   cursor: pointer;
   display: block;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.5;
   margin-bottom: 0;
   /* Styles for required inputs */ }
@@ -543,7 +543,7 @@ select {
   border-color: #cccccc;
   padding: 0.5rem;
   font-size: 0.875rem;
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   color: rgba(0, 0, 0, 0.75);
   line-height: normal;
   border-radius: 0;
@@ -1862,7 +1862,7 @@ p {
 
 /* Default header styles */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
   color: #222222;
@@ -2133,46 +2133,38 @@ blockquote p {
 
   .show-for-print {
     display: inherit !important; } }
-main {
+.layout {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
   max-width: 62.5rem; }
-  main:before, main:after {
+  .layout:before, .layout:after {
     content: " ";
     display: table; }
-  main:after {
+  .layout:after {
     clear: both; }
 
 #controls {
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: 62.5rem;
   position: fixed; }
-  #controls:before, #controls:after {
-    content: " ";
-    display: table; }
-  #controls:after {
-    clear: both; }
 
 #info {
   position: relative;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
-  width: 16.66667%;
-  left: 83.33333%;
+  width: 25%;
+  left: 75%;
   right: auto;
-  float: left; }
+  float: left;
+  background: #efefef;
+  padding: 1.875rem; }
 
 #content {
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
-  width: 83.33333%;
+  width: 75%;
   float: left; }
 
 /*# sourceMappingURL=app.css.map */

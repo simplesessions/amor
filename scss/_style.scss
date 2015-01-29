@@ -1,16 +1,22 @@
 main {
+  
+}
+
+.layout {
   @include grid-row;
 }
 
 #controls {
-  @include grid-row;
+  width: 100%;
   position: fixed;
 }
 
 #info {
-  @include grid-column($columns: 2, $push: 10);
+  @include grid-column($columns: 3, $push: 9);
+  background: map-get($colors, "panel-bg");
+  padding: rem-calc(30);
 }
 
 #content {
-  @include grid-column($columns: 10);
+  @include grid-column($columns: 9);
 }
