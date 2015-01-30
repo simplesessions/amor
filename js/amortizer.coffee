@@ -1,19 +1,18 @@
 class Amortizer
 
-  # constructor: (@interest, @loanAmount, @years) ->
-  #   calculateMonthlyPayment(@interest, @loanAmount, @years)
+  constructor: (@years, @loanAmount, @interest) ->
 
-  @monthlyPayment: (years, loanAmount, interest) ->
-    numPayments = years * 12
-    monthlyInterest = interest / 12
-    (loanAmount * monthlyInterest * Math.pow(1 + monthlyInterest, numPayments)) / (Math.pow(1 + monthlyInterest, numPayments) - 1)
+  monthlyPayment: ->
+    numPayments = @years * 12
+    monthlyInterest = @interest / 12
+    (@loanAmount * monthlyInterest * Math.pow(1 + monthlyInterest, numPayments)) / (Math.pow(1 + monthlyInterest, numPayments) - 1)
 
-  @paymentForBalance: (monthlyPayment, interest, currentBalance) ->
-    interestPmt = (interest / 12) * currentBalance
+  paymentForBalance: (monthlyPayment, currentBalance) ->
+    interestPmt = (@interest / 12) * currentBalance
     {
       interestPmt: interestPmt
       principalPmt: monthlyPayment - interestPmt
-      balance: currentBalance - (monthlyPayment - ((interest / 12) * currentBalance))
+      balance: currentBalance - (monthlyPayment - ((@interest / 12) * currentBalance))
     }
 
   @$: (val) ->
@@ -30,17 +29,17 @@ class Amortizer
       balance: 0
     }
 
-  @buildTable: (startDate, years, loanAmount, interest) ->
+  buildTable: (startDate) ->
     html = ''
     date = startDate
-    months = years * 12
-    currentBalance = loanAmount
-    monthlyPayment = Amortizer.monthlyPayment(years, loanAmount, interest)
+    months = @years * 12
+    currentBalance = @loanAmount
+    monthlyPayment = @monthlyPayment()
     yearTotals = Amortizer.emptyRow()
     yearTotals.year = startDate.format("YYYY")
 
     for numMonth in [0...months]
-      row = Amortizer.paymentForBalance(monthlyPayment, interest, currentBalance)
+      row = @paymentForBalance(monthlyPayment, currentBalance)
 
       html += "<tr>"
       html += "<td>#{date.format("MMM YYYY")}</td>"

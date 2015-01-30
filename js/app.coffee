@@ -1,5 +1,8 @@
+am = new Amortizer()
+info = {}
+
 updateValues = (info) ->
-  table = Amortizer.buildTable(info.startDate, info.years, info.loanAmount, info.interest)
+  table = am.buildTable(info.startDate)
   $('#amortization tbody').html(table)
 
   $('#summary-monthly-payment').html(Amortizer.$(info.monthlyPayment))
@@ -10,11 +13,11 @@ updateValues = (info) ->
 
 $('#info').on 'submit', (e) ->
   e.preventDefault()
-  info = {}
-  info.years = parseInt($('#input-term').val())
-  info.loanAmount = parseFloat($('#input-loan-amount').val())
-  info.interest = parseFloat($('#input-interest').val()) / 100
-  info.monthlyPayment = Amortizer.monthlyPayment(info.years, info.loanAmount, info.interest)
+  am.years = info.years = parseInt($('#input-term').val())
+  am.loanAmount = info.loanAmount = parseFloat($('#input-loan-amount').val())
+  am.interest = parseFloat($('#input-interest').val())
+  info.interest = am.interest / 100
+  info.monthlyPayment = am.monthlyPayment()
   info.totalPayment = info.monthlyPayment * info.years * 12
   info.totalInterest = info.totalPayment - info.loanAmount
   info.startDate = moment("#{$('#input-start-date-year').val()} #{$('#input-start-date-month').val()}")
