@@ -1,10 +1,23 @@
 class Amortizer
 
   constructor: (@years, @loanAmount, @interest, @startDate) ->
+    @extraPrincipalPayments = []
+    @update(@years, @loanAmount, @interest, @startDate)
+
+  update: (@years, @loanAmount, @interest, @startDate) ->
+    @stateDate = moment(@stateDate)
     @numPayments = @years * 12
     @monthlyPayment = @calculateMonthlyPayment()
     @totalPayment = @monthlyPayment * @numPayments
     @totalInterest = @totalPayment - @loanAmount
+
+  payExtra: (date, amount) ->
+    date = moment(date).format('YYYY MM')
+    amt = parseFloat(amount)
+    if date of @extraPrincipalPayments
+      @extraPrincipalPayments[date].push amt
+    else
+      @extraPrincipalPayments[date] = [amt]
 
   calculateMonthlyPayment: ->
     monthlyInterest = @interest / 12
@@ -12,10 +25,16 @@ class Amortizer
 
   paymentForBalance: (currentBalance) ->
     interestPmt = (@interest / 12) * currentBalance
+    principalPmt = @monthlyPayment - interestPmt
+    if principalPmt >= currentBalance
+      principalPmt = currentBalance
+      balance = 0
+    else
+      balance = currentBalance - (@monthlyPayment - ((@interest / 12) * currentBalance))
     {
       interestPmt: interestPmt
-      principalPmt: @monthlyPayment - interestPmt
-      balance: currentBalance - (@monthlyPayment - ((@interest / 12) * currentBalance))
+      principalPmt: principalPmt
+      balance: balance
     }
 
   @$: (val) ->
@@ -39,17 +58,29 @@ class Amortizer
 
     for numMonth in [0...months]
       row = @paymentForBalance(currentBalance)
+      currentBalance = row.balance
 
       html += "<tr>"
       html += "<td>#{date.format("MMM YYYY")}</td>"
       html += "<td>#{Amortizer.$(row.interestPmt)}</td>"
       html += "<td>#{Amortizer.$(row.principalPmt)}</td>"
-      html += "<td>#{Amortizer.$(row.balance)}</td>"
+      html += "<td>#{Amortizer.$(currentBalance)}</td>"
       html += "</tr>"
+
+      # check for extra payments
+      if date.format('YYYY MM') of @extraPrincipalPayments
+        for amt in @extraPrincipalPayments[date.format('YYYY MM')]
+          currentBalance -= amt
+          html += "<tr class=\"extra\">"
+          html += "<td>#{date.format("MMM YYYY")} +</td>"
+          html += "<td>&ndash;</td>"
+          html += "<td>(+) #{Amortizer.$(amt)}</td>"
+          html += "<td>#{Amortizer.$(currentBalance)}</td>"
+          html += "</tr>"
 
       yearTotals.interestPmt += row.interestPmt
       yearTotals.principalPmt += row.principalPmt
-      yearTotals.balance += row.balance
+      yearTotals.balance += currentBalance
 
       date = date.add(1, 'months')
       # summary row if year changed
@@ -58,12 +89,12 @@ class Amortizer
         html += "<th>#{yearTotals.year}</th>"
         html += "<th>#{Amortizer.$(yearTotals.interestPmt)}</th>"
         html += "<th>#{Amortizer.$(yearTotals.principalPmt)}</th>"
-        html += "<th>#{Amortizer.$(row.balance)}</th>"
+        html += "<th>#{Amortizer.$(currentBalance)}</th>"
         html += "</tr>"
 
-      yearTotals = Amortizer.emptyRow()
-      yearTotals.year = date.format("YYYY")
+        yearTotals = Amortizer.emptyRow()
+        yearTotals.year = date.format("YYYY")
 
-      currentBalance = row.balance
+      break if currentBalance == 0
 
     html

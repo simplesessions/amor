@@ -40,6 +40,9 @@ table {
     &.year-summary {
       background-color: map-get($colors, "summary-row");
     }
+    &.extra {
+      background-color: map-get($colors, "extra-row");
+    }
   }
 }
 

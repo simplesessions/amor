@@ -1,4 +1,33 @@
-am = null
+am = new Amortizer()
+# am.payExtra('2015 12', 12500)
+# am.payExtra('2016 12', 12500)
+# am.payExtra('2017 12', 12500)
+# am.payExtra('2018 12', 12500)
+# am.payExtra('2019 12', 12500)
+# am.payExtra('2020 12', 12500)
+# am.payExtra('2021 12', 12500)
+# am.payExtra('2022 12', 12500)
+
+am.payExtra('2015 6', 6250)
+am.payExtra('2015 12', 9250)
+am.payExtra('2016 6', 6250)
+am.payExtra('2016 12', 9250)
+am.payExtra('2017 6', 6250)
+am.payExtra('2017 12', 9250)
+am.payExtra('2018 6', 6250)
+am.payExtra('2018 12', 9250)
+am.payExtra('2019 6', 6250)
+am.payExtra('2019 12', 9250)
+am.payExtra('2020 6', 6250)
+am.payExtra('2020 12', 9250)
+am.payExtra('2021 6', 6250)
+am.payExtra('2021 12', 9250)
+am.payExtra('2022 6', 6250)
+am.payExtra('2022 12', 9250)
+am.payExtra('2023 6', 6250)
+am.payExtra('2023 12', 9250)
+am.payExtra('2024 6', 6250)
+am.payExtra('2024 12', 9250)
 
 updateValues = (am) ->
   $('#amortization tbody').html(am.buildTable())
@@ -10,8 +39,8 @@ updateValues = (am) ->
 
 $('#info').on 'submit', (e) ->
   e.preventDefault()
-  am = new Amortizer(parseInt($('#input-term').val()),
-                     parseFloat($('#input-loan-amount').val()),
-                     parseFloat($('#input-interest').val()) / 100,
-                     moment("#{$('#input-start-date-year').val()} #{$('#input-start-date-month').val()}"))
+  am.update(parseInt($('#input-term').val()),
+            parseFloat($('#input-loan-amount').val()),
+            parseFloat($('#input-interest').val()) / 100,
+            moment("#{$('#input-start-date-year').val()} #{$('#input-start-date-month').val()}"))
   updateValues(am)
