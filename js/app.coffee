@@ -1,3 +1,5 @@
+am = null
+
 updateValues = (am) ->
   table = am.buildTable()
   $('#amortization tbody').html(table)
@@ -13,6 +15,6 @@ $('#info').on 'submit', (e) ->
   e.preventDefault()
   am = new Amortizer(parseInt($('#input-term').val()),
                      parseFloat($('#input-loan-amount').val()),
-                     parseFloat($('#input-interest').val()),
+                     parseFloat($('#input-interest').val()) / 100,
                      moment("#{$('#input-start-date-year').val()} #{$('#input-start-date-month').val()}"))
   updateValues(am)
