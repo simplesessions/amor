@@ -1,14 +1,35 @@
-main {
-  padding: rem-calc(30) 0;
+html {
+  font-size: 14px;
 }
 
 .layout {
   @include grid-row;
 }
 
+header {
+  @include grid-row;
+  h1 {
+    @include grid-column($columns: 12);
+  }
+}
+
 #controls {
-  width: 100%;
-  position: fixed;
+  background-color: map-get($colors, panel-bg);
+  margin-bottom: rem-calc(30);
+  fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .button {
+    width: 100%;
+    margin: 0;
+  }
+  .field {
+    &.submit {
+      @include grid-column($columns: 12);
+    }
+  }
 }
 
 .input {
@@ -22,13 +43,9 @@ main {
 }
 
 #info {
-  @include grid-column($columns: 3, $push: 9);
-  background: map-get($colors, "panel-bg");
   padding: rem-calc(30);
-}
-
-#content {
-  @include grid-column($columns: 9);
+  overflow: auto;
+  border: $panel-border-style $panel-border-size $panel-border-color;
 }
 
 #amortization {
@@ -52,4 +69,47 @@ table {
   dl {
     @include grid-column($columns: 3);
   }
+}
+
+@media screen and (min-width: 500px) {
+  html {
+    font-size: 16px;
+  }
+  #controls {
+    fieldset {
+      @include grid-row;
+    }
+    .amounts, .dates {
+      @include grid-column($columns: 6);
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  #controls {
+    width: 100%;
+    position: fixed;
+    background-color: transparent;
+    .amounts, .dates {
+      @include grid-column($columns: 12);
+    }
+  }
+  #info {
+    @include grid-column($columns: 4, $push: 8);
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 0;
+  }
+  #content {
+    @include grid-column($columns: 8);
+  }
+}
+
+@media screen and (min-width: 935px) {
+  // #info {
+  //   @include grid-column($columns: 3, $push: 9);
+  // }
+  // #content {
+  //   @include grid-column($columns: 9);
+  // }
 }

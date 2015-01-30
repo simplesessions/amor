@@ -12,11 +12,13 @@ html.no-js(lang="en")
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css')
   body
 
+    header
+      h1 Amortizer
+
     include components/_controls
 
     main.layout
       #content
-        h1 Amortizer
         include components/_summary_panel
         table#amortization
           thead

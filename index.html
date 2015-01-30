@@ -10,76 +10,85 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
   </head>
   <body>
+    <header>
+      <h1>Amortizer</h1>
+    </header>
     <div id="controls">
       <div class="layout">
         <form id="info">
-          <div class="field">
-            <label for="input-loan-amount">Loan Amount
-              <div class="input"><span class="prefix">$</span>
-                <input id="input-loan-amount" type="number" placeholder="How much?" required class="currency">
+          <fieldset>
+            <div class="amounts">
+              <div class="field">
+                <label for="input-loan-amount">Loan Amount
+                  <div class="input"><span class="prefix">$</span>
+                    <input id="input-loan-amount" type="number" placeholder="How much?" required class="currency">
+                  </div>
+                </label>
               </div>
-            </label>
-          </div>
-          <div class="field">
-            <label for="input-term">Term
-              <div class="input"><span class="prefix">Years</span>
-                <input id="input-term" type="number" placeholder="How long?" required>
+              <div class="field">
+                <label for="input-term">Term
+                  <div class="input"><span class="prefix">Years</span>
+                    <input id="input-term" type="number" placeholder="How long?" required>
+                  </div>
+                </label>
               </div>
-            </label>
-          </div>
-          <div class="field">
-            <label for="input-interest">Interest Rate
-              <div class="input"><span class="prefix">%</span>
-                <input id="input-interest" type="number" placeholder="Your rate" required>
+              <div class="field">
+                <label for="input-interest">Interest Rate
+                  <div class="input"><span class="prefix">%</span>
+                    <input id="input-interest" type="number" placeholder="Your rate" required>
+                  </div>
+                </label>
               </div>
-            </label>
-          </div>
-          <div class="field">
-            <label for="input-start-date-month">Start Date</label>
-            <select id="input-start-date-month">
-              <option value="1" selected>January</option>
-              <option value="2">February</option>
-              <option value="3">March</option>
-              <option value="4">April</option>
-              <option value="5">May</option>
-              <option value="6">June</option>
-              <option value="7">July</option>
-              <option value="8">August</option>
-              <option value="9">September</option>
-              <option value="10">October</option>
-              <option value="11">November</option>
-              <option value="12">December</option>
-            </select>
-            <select id="input-start-date-year">
-              <option value="1990">1990</option>
-              <option value="1991">1991</option>
-              <option value="1992">1992</option>
-              <option value="1993">1993</option>
-              <option value="1994">1994</option>
-              <option value="1995">1995</option>
-              <option value="1996">1996</option>
-              <option value="1997">1997</option>
-              <option value="1998">1998</option>
-              <option value="1999">1999</option>
-              <option value="2000">2000</option>
-              <option value="2001">2001</option>
-              <option value="2002">2002</option>
-              <option value="2003">2003</option>
-              <option value="2004">2004</option>
-              <option value="2005">2005</option>
-              <option value="2006">2006</option>
-              <option value="2007">2007</option>
-              <option value="2008">2008</option>
-              <option value="2009">2009</option>
-              <option value="2010">2010</option>
-              <option value="2011">2011</option>
-              <option value="2012">2012</option>
-              <option value="2013">2013</option>
-              <option value="2014">2014</option>
-              <option value="2015" selected>2015</option>
-            </select>
-          </div>
-          <div class="field">
+            </div>
+            <div class="dates">
+              <div class="field">
+                <label for="input-start-date-month">Start Date</label>
+                <select id="input-start-date-month">
+                  <option value="1" selected>January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                <select id="input-start-date-year">
+                  <option value="1990">1990</option>
+                  <option value="1991">1991</option>
+                  <option value="1992">1992</option>
+                  <option value="1993">1993</option>
+                  <option value="1994">1994</option>
+                  <option value="1995">1995</option>
+                  <option value="1996">1996</option>
+                  <option value="1997">1997</option>
+                  <option value="1998">1998</option>
+                  <option value="1999">1999</option>
+                  <option value="2000">2000</option>
+                  <option value="2001">2001</option>
+                  <option value="2002">2002</option>
+                  <option value="2003">2003</option>
+                  <option value="2004">2004</option>
+                  <option value="2005">2005</option>
+                  <option value="2006">2006</option>
+                  <option value="2007">2007</option>
+                  <option value="2008">2008</option>
+                  <option value="2009">2009</option>
+                  <option value="2010">2010</option>
+                  <option value="2011">2011</option>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015" selected>2015</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          <div class="field submit">
             <input type="submit" name="submit" value="Calculate" class="button">
           </div>
         </form>
@@ -87,23 +96,22 @@
     </div>
     <main class="layout">
       <div id="content">
-        <h1>Amortizer</h1>
         <div id="summary" class="panel">
           <dl>
             <dd id="summary-monthly-payment">$0.00</dd>
-            <dt>Monthly Principal &amp; Interest</dt>
+            <dt>Monthly Payment</dt>
           </dl>
           <dl>
             <dd id="summary-total-payment">$0.00</dd>
-            <dt>Total of <span class="num-payments">_</span> Payments</dt>
+            <dt>After <span class="num-payments">()</span> Payments</dt>
           </dl>
           <dl>
             <dd id="summary-total-interest">$0.00</dd>
-            <dt>Total Interest Paid</dt>
+            <dt>Total Interest</dt>
           </dl>
           <dl>
-            <dd id="summary-pay-off-date"></dd>
-            <dt>Pay-off Date</dt>
+            <dd id="summary-pay-off-date">()</dd>
+            <dt>Pay-off</dt>
           </dl>
         </div>
         <table id="amortization">
