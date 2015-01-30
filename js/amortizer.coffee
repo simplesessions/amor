@@ -1,4 +1,4 @@
-class Amortization
+class Amortizer
 
   # constructor: (@interest, @loanAmount, @years) ->
   #   calculateMonthlyPayment(@interest, @loanAmount, @years)
@@ -17,7 +17,7 @@ class Amortization
     }
 
   @$: (val) ->
-    accounting.formatMoney(Amortization.round(val))
+    accounting.formatMoney(Amortizer.round(val))
 
   @round: (val) ->
     Math.round(val * 100) / 100
@@ -35,18 +35,18 @@ class Amortization
     date = startDate
     months = years * 12
     currentBalance = loanAmount
-    monthlyPayment = Amortization.monthlyPayment(years, loanAmount, interest)
-    yearTotals = Amortization.emptyRow()
+    monthlyPayment = Amortizer.monthlyPayment(years, loanAmount, interest)
+    yearTotals = Amortizer.emptyRow()
     yearTotals.year = startDate.format("YYYY")
 
     for numMonth in [0...months]
-      row = Amortization.paymentForBalance(monthlyPayment, interest, currentBalance)
+      row = Amortizer.paymentForBalance(monthlyPayment, interest, currentBalance)
 
       html += "<tr>"
       html += "<td>#{date.format("MMM YYYY")}</td>"
-      html += "<td>#{Amortization.$(row.interestPmt)}</td>"
-      html += "<td>#{Amortization.$(row.principalPmt)}</td>"
-      html += "<td>#{Amortization.$(row.balance)}</td>"
+      html += "<td>#{Amortizer.$(row.interestPmt)}</td>"
+      html += "<td>#{Amortizer.$(row.principalPmt)}</td>"
+      html += "<td>#{Amortizer.$(row.balance)}</td>"
       html += "</tr>"
 
       yearTotals.interestPmt += row.interestPmt
@@ -58,12 +58,12 @@ class Amortization
       if date.format("YYYY") != yearTotals.year
         html += "<tr class=\"year-summary\">"
         html += "<th>#{yearTotals.year}</th>"
-        html += "<th>#{Amortization.$(yearTotals.interestPmt)}</th>"
-        html += "<th>#{Amortization.$(yearTotals.principalPmt)}</th>"
-        html += "<th>#{Amortization.$(row.balance)}</th>"
+        html += "<th>#{Amortizer.$(yearTotals.interestPmt)}</th>"
+        html += "<th>#{Amortizer.$(yearTotals.principalPmt)}</th>"
+        html += "<th>#{Amortizer.$(row.balance)}</th>"
         html += "</tr>"
 
-      yearTotals = Amortization.emptyRow()
+      yearTotals = Amortizer.emptyRow()
       yearTotals.year = date.format("YYYY")
 
       currentBalance = row.balance
