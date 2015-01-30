@@ -1,12 +1,14 @@
 class Amortizer
 
   constructor: (@years, @loanAmount, @interest, @startDate) ->
+    @numPayments = @years * 12
     @monthlyPayment = @calculateMonthlyPayment()
+    @totalPayment = @monthlyPayment * @numPayments
+    @totalInterest = @totalPayment - @loanAmount
 
   calculateMonthlyPayment: ->
-    numPayments = @years * 12
     monthlyInterest = @interest / 12
-    (@loanAmount * monthlyInterest * Math.pow(1 + monthlyInterest, numPayments)) / (Math.pow(1 + monthlyInterest, numPayments) - 1)
+    (@loanAmount * monthlyInterest * Math.pow(1 + monthlyInterest, @numPayments)) / (Math.pow(1 + monthlyInterest, @numPayments) - 1)
 
   paymentForBalance: (currentBalance) ->
     interestPmt = (@interest / 12) * currentBalance

@@ -1,15 +1,12 @@
 am = null
 
 updateValues = (am) ->
-  table = am.buildTable()
-  $('#amortization tbody').html(table)
-
-  totalPayment = am.monthlyPayment * am.years * 12
+  $('#amortization tbody').html(am.buildTable())
   $('#summary-monthly-payment').html(Amortizer.$(am.monthlyPayment))
-  $('#summary-total-payment').html(Amortizer.$(totalPayment))
-  $('#summary-total-interest').html(Amortizer.$(totalPayment - am.loanAmount))
+  $('#summary-total-payment').html(Amortizer.$(am.totalPayment))
+  $('#summary-total-interest').html(Amortizer.$(am.totalInterest))
   $('#summary-pay-off-date').html(am.startDate.subtract(1, 'months').format("MMM YYYY"))
-  $('.num-payments').html(am.years * 12)
+  $('.num-payments').html(am.numPayments)
 
 $('#info').on 'submit', (e) ->
   e.preventDefault()
