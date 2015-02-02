@@ -20,14 +20,7 @@ html.no-js(lang="en")
     main.layout
       #content
         include components/_summary_panel
-        table#amortization
-          thead
-            tr
-              th Date
-              th Interest
-              th Principal
-              th Balance
-          tbody
+        include components/_amortization
 
     script(src="bower_components/jquery/dist/jquery.min.js")
     script(src="bower_components/moment/moment.js")
