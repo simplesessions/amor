@@ -59,24 +59,13 @@ class Amortizer
     for numMonth in [0...months]
       row = @paymentForBalance(currentBalance)
       currentBalance = row.balance
-
-      html += "<tr>"
-      html += "<td>#{date.format("MMM YYYY")}</td>"
-      html += "<td>#{Amortizer.$(row.interestPmt)}</td>"
-      html += "<td>#{Amortizer.$(row.principalPmt)}</td>"
-      html += "<td>#{Amortizer.$(currentBalance)}</td>"
-      html += "</tr>"
+      html += AmortizerRenderer.buildStandardRow(date, row)
 
       # check for extra payments
       if date.format('YYYY MM') of @extraPrincipalPayments
         for amt in @extraPrincipalPayments[date.format('YYYY MM')]
           currentBalance -= amt
-          html += "<tr class=\"extra\">"
-          html += "<td>#{date.format("MMM YYYY")} +</td>"
-          html += "<td>&ndash;</td>"
-          html += "<td>(+) #{Amortizer.$(amt)}</td>"
-          html += "<td>#{Amortizer.$(currentBalance)}</td>"
-          html += "</tr>"
+          html += AmortizerRenderer.buildExtraPaymentRow(date, amt, currentBalance)
 
       yearTotals.interestPmt += row.interestPmt
       yearTotals.principalPmt += row.principalPmt
@@ -85,16 +74,36 @@ class Amortizer
       date = date.add(1, 'months')
       # summary row if year changed
       if date.format("YYYY") != yearTotals.year
-        html += "<tr class=\"year-summary\">"
-        html += "<th>#{yearTotals.year}</th>"
-        html += "<th>#{Amortizer.$(yearTotals.interestPmt)}</th>"
-        html += "<th>#{Amortizer.$(yearTotals.principalPmt)}</th>"
-        html += "<th>#{Amortizer.$(currentBalance)}</th>"
-        html += "</tr>"
-
+        html += AmortizerRenderer.buildYearSummaryRow(yearTotals.year, yearTotals.interestPmt, yearTotals.principalPmt, currentBalance)
         yearTotals = Amortizer.emptyRow()
         yearTotals.year = date.format("YYYY")
 
       break if currentBalance == 0
 
     html
+
+class AmortizerRenderer
+
+  @buildStandardRow: (date, row) ->
+    html  = "<tr>"
+    html += "<td>#{date.format("MMM YYYY")}</td>"
+    html += "<td>#{Amortizer.$(row.interestPmt)}</td>"
+    html += "<td>#{Amortizer.$(row.principalPmt)}</td>"
+    html += "<td>#{Amortizer.$(row.balance)}</td>"
+    html += "</tr>"
+
+  @buildExtraPaymentRow: (date, amount, currentBalance) ->
+    html  = "<tr class=\"extra\">"
+    html += "<td>#{date.format("MMM YYYY")} +</td>"
+    html += "<td>&ndash;</td>"
+    html += "<td>(+) #{Amortizer.$(amount)}</td>"
+    html += "<td>#{Amortizer.$(currentBalance)}</td>"
+    html += "</tr>"
+
+  @buildYearSummaryRow: (year, interestPmt, principalPmt, currentBalance) ->
+    html  = "<tr class=\"year-summary\">"
+    html += "<th>#{year}</th>"
+    html += "<th>#{Amortizer.$(interestPmt)}</th>"
+    html += "<th>#{Amortizer.$(principalPmt)}</th>"
+    html += "<th>#{Amortizer.$(currentBalance)}</th>"
+    html += "</tr>"
