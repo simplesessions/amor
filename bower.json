@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "private": "true",
   "dependencies": {
-    "foundation": "zurb/bower-foundation"
+    "accounting.js": "~0.4.1",
+    "angular": "~1.4.7",
+    "foundation": "zurb/bower-foundation",
+    "moment": "~2.10.6"
   },
   "resolutions": {
     "jquery": ">=1.6"

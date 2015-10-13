@@ -4,6 +4,25 @@ class Amortizer
     @extraPrincipalPayments = []
     @update(@years, @loanAmount, @interest, @startDate)
 
+  loadPaymentsFrom: (url) ->
+    request = new XMLHttpRequest()
+    request.open('GET', url, true)
+
+    request.onload = =>
+      if request.status >= 200 && request.status < 400
+        @parseJSONPaymentData JSON.parse(request.responseText)
+      else
+        console.log('Error loading payments from file')
+
+    request.onerror = ->
+      console.log('Error connecting while trying to load payments from file')
+
+    request.send()
+
+  parseJSONPaymentData: (payments) ->
+    for payment in payments
+      @payExtra("#{payment.year}-#{payment.month}-01", payment.amount)
+
   update: (@years, @loanAmount, @interest, @startDate) ->
     @stateDate = moment(@stateDate)
     @numPayments = @years * 12
@@ -12,7 +31,7 @@ class Amortizer
     @totalInterest = @totalPayment - @loanAmount
 
   payExtra: (date, amount) ->
-    date = moment(date).format('YYYY MM')
+    date = moment(date).format('YYYY-MM-DD')
     amt = parseFloat(amount)
     if date of @extraPrincipalPayments
       @extraPrincipalPayments[date].push amt
@@ -62,8 +81,8 @@ class Amortizer
       html += AmortizerRenderer.buildStandardRow(date, row)
 
       # check for extra payments
-      if date.format('YYYY MM') of @extraPrincipalPayments
-        for amt in @extraPrincipalPayments[date.format('YYYY MM')]
+      if date.format('YYYY-MM-DD') of @extraPrincipalPayments
+        for amt in @extraPrincipalPayments[date.format('YYYY-MM-DD')]
           currentBalance -= amt
           html += AmortizerRenderer.buildExtraPaymentRow(date, amt, currentBalance)
 
