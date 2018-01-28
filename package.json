@@ -1,0 +1,8 @@
+{
+  "name": "amortizer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:simplesessions/amortizer.git",
+  "author": "Charles Kihe <charles@simplesessions.com>",
+  "license": "MIT"
+}
